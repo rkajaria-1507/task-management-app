@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const fetchTasks = async () => {
   const response = await axios.get("/api/tasks");
