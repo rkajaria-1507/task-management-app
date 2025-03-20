@@ -2,9 +2,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from decouple import config
-from ..utils.decrypt import decrypt_value
 
-SECRET_KEY = decrypt_value(config("JWT_SECRET_KEY"))
+SECRET_KEY = config("JWT_SECRET_KEY")
 ALGORITHM = config("JWT_ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(config("JWT_EXPIRE_MINUTES"))
 

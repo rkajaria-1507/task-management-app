@@ -7,5 +7,10 @@ const fetchTasks = async () => {
 };
 
 export const useTasks = () => {
-  return useQuery(["tasks"], fetchTasks);
+  return useQuery(["tasks"], fetchTasks, {
+    staleTime: 60000, // 1 minute
+    cacheTime: 300000, // 5 minutes
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
 };

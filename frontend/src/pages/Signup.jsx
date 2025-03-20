@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, Link } from "@tanstack/react-router";
 import { signup } from "../api/auth";
 
 export default function Signup() {
@@ -45,6 +45,14 @@ export default function Signup() {
             Signup
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <p className="text-[#666666]">
+            Already have an account?{" "}
+            <Link to="/login" className="text-[#6C9BCF] hover:underline">
+              Log in
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

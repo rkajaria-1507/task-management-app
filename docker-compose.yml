@@ -9,9 +9,12 @@ services:
       - db
     volumes:
       - ./backend:/app
+    networks:
+      - app-network
 
   frontend:
     build: ./frontend
+    hostname: frontend
     ports:
       - "3000:3000"
     depends_on:
@@ -19,6 +22,14 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules  # Ensure node_modules is not overwritten by the host
+    environment:
+      - VITE_BACKEND_URL=http://backend:8000
+      - WDS_SOCKET_PORT=3000
+      - VITE_HMR_HOSTNAME=localhost
+      - VITE_HMR_PROTOCOL=ws
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - app-network
 
   db:
     image: postgres:13
@@ -30,6 +41,12 @@ services:
       - "1309:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

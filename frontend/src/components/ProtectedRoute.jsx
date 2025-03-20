@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import React, { useEffect } from "react";
+import { useNavigate, Outlet } from "@tanstack/react-router";
 import useAuthStore from "../store/authStore";
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute() {
   const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
@@ -12,5 +12,7 @@ export default function ProtectedRoute({ children }) {
     }
   }, [isAuthenticated, navigate]);
 
-  return isAuthenticated ? children : null;
+  // If not authenticated, we return null (empty) while we redirect
+  // If authenticated, we render the child route via <Outlet />
+  return isAuthenticated ? <Outlet /> : null;
 }
